@@ -49,5 +49,10 @@
 	<string>The Chamber Tower needs camera access for your morning selfies and profile photo.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>The Chamber Tower needs photo library access to save and select your tower gallery photos.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

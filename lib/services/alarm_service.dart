@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz_data;
@@ -18,13 +19,21 @@ class AlarmService {
     tz.setLocalLocation(tz.getLocation(_resolveTimeZone()));
 
     const iosSettings = DarwinInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
     );
 
     const initSettings = InitializationSettings(iOS: iosSettings);
     await _plugin.initialize(initSettings);
+
+    // Re-schedule alarm if it was enabled before app restart
+    final storage = StorageService();
+    await storage.init();
+    if (storage.isAlarmEnabled()) {
+      await scheduleAlarm(storage.getAlarmHour(), storage.getAlarmMinute());
+    }
+
     _initialized = true;
   }
 
@@ -91,6 +100,8 @@ class AlarmService {
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
+      sound: 'default',
+      interruptionLevel: InterruptionLevel.timeSensitive,
     );
 
     const details = NotificationDetails(iOS: iosDetails);
@@ -106,6 +117,12 @@ class AlarmService {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
+
+    debugPrint('Alarm scheduled for: $scheduledDate');
+
+    // Verify it was scheduled
+    final pending = await _plugin.pendingNotificationRequests();
+    debugPrint('Pending notifications: ${pending.length}');
   }
 
   Future<void> cancelAlarm() async {
