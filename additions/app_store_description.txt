@@ -1,0 +1,11 @@
+PRO TRACKING FISH - APP STORE DESCRIPTION
+
+APP NAME: Pro Tracking Fish
+
+SUBTITLE: Smart Aquarium Care & Fish Tracker
+
+DESCRIPTION:
+Transform aquarium care into an engaging experience! Track water parameters (temperature, pH, ammonia, nitrates, nitrites) with precision. Your virtual aquarium responds to real data - fish become vibrant with ideal conditions or show stress when parameters need attention. Built-in calculator for water changes, comprehensive statistics, and achievement system. Unlock rare fish species as you progress. Smart notifications for testing and feeding. Perfect for saltwater and freshwater tanks!
+
+KEYWORDS:
+aquarium,fishcare,waterparameters,aquatracker,fishkeeper,waterquality,fishhealth,fishtank
