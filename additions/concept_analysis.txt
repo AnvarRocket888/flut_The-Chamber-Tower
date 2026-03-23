@@ -1,0 +1,82 @@
+CONCEPT ANALYSIS — The Chamber Tower
+======================================
+
+CORE CONCEPT:
+Alarm/sleep tracking app gamified as building a tower.
+Each hour of sleep = 1 floor built. Goal: build 8-floor tower (8 hours).
+Natural wake-up = tower lights up (success). Alarm interruption = tower falls.
+
+GAMIFICATION MECHANICS:
+- Sleep duration directly maps to tower height
+- Visual reward: colorful, progressively beautiful tower
+- Streak tracking: consecutive complete towers
+- Morning selfie capture: celebrate waking up
+- Dream journal: brief notes per session
+- Mood tracking with emoji
+
+UNIQUE ADDITIONS:
+- Each floor has a unique name, emoji, and color scheme
+- "Dream Knight" player identity with avatar (camera/gallery)
+- Morning Gallery: collection of wake-up selfies attached to sessions
+- Tower themes: visual customization options
+- Smart bedtime calculator: suggests bedtime based on alarm and goal
+- Sleep quality indicators with emoji mood selector
+
+SCREEN MAP:
+==========
+
+1. TOWER SCREEN (Home Tab — 🏰)
+   - Main tower visualization with 8 colorful floor panels
+   - Sky gradient background with floating clouds
+   - Sleep status indicator (sleeping/awake)
+   - "Go to Sleep 🌙" / "Wake Up ☀️" action button
+   - Elapsed time display during sleep
+   - Floor count: "X/8 floors built"
+   - When waking up: completion modal with mood/selfie/dream note
+
+2. ALARM SCREEN (Tab — ⏰)
+   - Wake-up time picker (CupertinoDatePicker)
+   - Sleep goal adjuster (4-12 hours stepper)
+   - Emoji visualization of goal floors
+   - Smart bedtime suggestion display
+   - Colorful gradient panels for each setting
+
+3. HISTORY SCREEN (Tab — 📊)
+   - Summary stats row: streak, avg hours, total towers
+   - Chronological list of past sleep sessions
+   - Each entry: date, duration, floors built, mood emoji
+   - Mini tower bar visualization per session
+   - Dream note preview
+   - Crown icon for complete towers
+
+4. PROFILE SCREEN (Tab — 👤)
+   - User avatar (camera/gallery integration)
+   - Editable "Knight's Name"
+   - Stats grid: towers completed, current streak, best streak, total sessions
+   - Morning selfie gallery (photo grid)
+   - Settings navigation (gear icon)
+
+5. SETTINGS SCREEN (Push from Profile)
+   - Tower settings section
+   - App information (version, developer)
+   - Reset all data option (with confirmation dialog)
+
+6. WAKE-UP MODAL (Overlay on Tower Screen)
+   - Completion message (congrats or morning greeting)
+   - Floors built summary
+   - Sleep duration display
+   - Emoji mood selector (5 options)
+   - Camera selfie button
+   - Gallery photo button
+   - Dream note text field
+   - Save & close action
+
+TECHNICAL APPROACH:
+- Cupertino widgets throughout (iOS-only)
+- SharedPreferences for data persistence
+- image_picker for camera/gallery
+- path_provider for photo storage
+- Timer-based sleep tracking (calculate elapsed time)
+- WidgetsBindingObserver for app lifecycle (resume recalculation)
+- No push notifications, no online features, no widgets
+- Adaptive design using MediaQuery
