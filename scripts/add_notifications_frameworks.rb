@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Скрипт для добавления фреймворков в notifications target (Do not Embed)
+# Скрипт для добавления фреймворков в ntfs target (Do not Embed)
 # Добавляет: FirebaseMessaging.framework, FirebaseCore.framework, UserNotifications.framework
 
 require 'securerandom'
@@ -19,10 +19,10 @@ end
 
 content = File.read(PBXPROJ_PATH)
 
-# ID для notifications target и его Frameworks phase
+# ID для ntfs target и его Frameworks phase
 NOTIF_FRAMEWORKS_PHASE = 'NOTIF008000000000000001'
 
-# Проверяем что notifications target существует
+# Проверяем что ntfs target существует
 unless content.include?(NOTIF_FRAMEWORKS_PHASE)
   puts "\033[0;31m❌ Notifications target не найден. Сначала выполните make setup-notifications\033[0m"
   exit 1
@@ -48,7 +48,7 @@ else
   puts "\033[0;33m   ⚠️  FirebaseMessaging.framework уже добавлен\033[0m"
 end
 
-# FirebaseCore.framework - проверим, добавлен ли он в notifications target
+# FirebaseCore.framework - проверим, добавлен ли он в ntfs target
 # Он может быть уже добавлен с Embed, нужно убрать embed
 firebase_core_in_notif = content.match(/(\w{24}) \/\* FirebaseCore\.framework in Frameworks \*\/ = \{isa = PBXBuildFile.*?0D062EE42EE239F5009903F5.*?\}/)
 if firebase_core_in_notif || content.include?('0D062EE52EE239F5009903F5 /* FirebaseCore.framework in Frameworks */')
@@ -92,7 +92,7 @@ else
   puts "\033[0;33m   ⚠️  UserNotifications.framework уже добавлен\033[0m"
 end
 
-# Удаляем Embed Frameworks фазу 0D062EE72EE239F5009903F5 для notifications если есть
+# Удаляем Embed Frameworks фазу 0D062EE72EE239F5009903F5 для ntfs если есть
 if content.include?('0D062EE72EE239F5009903F5 /* Embed Frameworks */')
   puts "   Удаление Embed Frameworks фазы..."
   
@@ -102,7 +102,7 @@ if content.include?('0D062EE72EE239F5009903F5 /* Embed Frameworks */')
   # Удаляем саму фазу целиком
   content.gsub!(/\t\t0D062EE72EE239F5009903F5 \/\* Embed Frameworks \*\/ = \{\s*isa = PBXCopyFilesBuildPhase;[^}]*files = \([^)]*\);[^}]*\};\n/, '')
   
-  # Удаляем ссылку на эту фазу из notifications target buildPhases
+  # Удаляем ссылку на эту фазу из ntfs target buildPhases
   content.gsub!(/\s*0D062EE72EE239F5009903F5 \/\* Embed Frameworks \*\/,/, '')
   
   puts "\033[0;32m   ✓ Embed Frameworks фаза удалена\033[0m"
@@ -130,7 +130,7 @@ frameworks_to_add.each do |fw|
     end
   end
   
-  # 4. Добавляем в Frameworks build phase для notifications (NOTIF008000000000000001)
+  # 4. Добавляем в Frameworks build phase для ntfs (NOTIF008000000000000001)
   content.gsub!(/(#{NOTIF_FRAMEWORKS_PHASE} \/\* Frameworks \*\/ = \{[^}]*files = \()([^)]*\);)/) do
     prefix = $1
     files = $2
@@ -147,4 +147,4 @@ end
 # Записываем файл
 File.write(PBXPROJ_PATH, content)
 
-puts "\033[0;32m✅ Фреймворки добавлены в notifications target (Do not Embed)\033[0m"
+puts "\033[0;32m✅ Фреймворки добавлены в ntfs target (Do not Embed)\033[0m"
