@@ -1,0 +1,53 @@
+DESIGN REFERENCE ANALYSIS — The Chamber Tower
+================================================
+
+Source: Promotional image showing colorful tower/building stacking game on iPhones.
+
+1. COLOR PALETTE
+   - Sky Blue: #4AABFF (bright clear sky background)
+   - Deep Sky: #1E6FD9 (deeper blue gradient)
+   - Light Sky: #B8E0FF (top of sky, near clouds)
+   - Golden Yellow: #FFD700 (accents, sparkles, highlights)
+   - Warm Orange: #FF9500 (glowing windows, warm interior light)
+   - Brick Red: #CC5A3C (brick building floors)
+   - Dark Brick: #8B3A2A (darker brick shading)
+   - Forest Green: #4CAF50 (window shutters, plant accents)
+   - Dark Green: #2E7D32 (darker green shading)
+   - Royal Purple: #7E57C2 (wizard hat, magical elements)
+   - Deep Purple: #4A148C (deeper purple tones)
+   - Magic Pink: #EC407A (sparkle stars, magical effects)
+   - Light Pink: #F48FB1 (softer pink panels)
+   - Stone Brown: #9E8E7E (stone building blocks)
+   - Wood Brown: #8D6E63 (wooden floor panels)
+   - Cloud White: #F0F4F8 (clouds, highlights)
+   - Night Blue: #1A1A2E (dark UI backgrounds)
+
+2. VISUAL ELEMENTS
+   - Stacked colorful building floors (tower structure)
+   - Each floor has a unique style: brick, wood, stone, colored panels
+   - Windows with green shutters and warm interior glow
+   - Decorative clouds floating in blue sky
+   - Magical sparkle stars (purple/pink)
+   - Fantasy theme: wizard hat, golden keys, sparkle effects
+   - Rich gradients throughout (sky, panels, lighting)
+   - Rounded corners on building elements
+   - Warm, whimsical, and playful aesthetic
+
+3. DESIGN PATTERNS
+   - Vertical stacking of colorful panels (core visual metaphor)
+   - Gradient backgrounds (sky transitions from light to deep blue)
+   - Bold, saturated colors for each floor/panel
+   - Glowing/lit-up effects for active/completed elements
+   - Cloud and weather decorations in background
+   - Text with shadows for readability over colorful backgrounds
+   - Emoji-friendly visual language
+
+4. KEY TAKEAWAYS FOR APP DESIGN
+   - Use vibrant, distinct colors for each tower floor
+   - Apply gradient backgrounds (sky/night themes)
+   - Include floating decorative elements (clouds, stars)
+   - Use warm golden accents for highlights and interactive elements
+   - Each floor should feel unique with different colors and decorations
+   - Maintain whimsical/magical aesthetic throughout
+   - Ensure text readability with outlines/shadows over gradients
+   - Use rounded corners and soft shadows for panels
