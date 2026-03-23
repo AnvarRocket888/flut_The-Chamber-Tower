@@ -1,0 +1,56 @@
+Running `(cd /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/; ANDROID_HOME=/Users/anvarsalakhov/Library/Android/sdk TMPDIR=/var/folders/6z/tpszb4393gqcx6ysclbj_18r0000gn/T/ PATH=/Applications/Xcode.app/Contents/SharedFrameworks/SwiftBuild.framework/Versions/A/PlugIns/SWBBuildService.bundle/Contents/PlugIns/SWBUniversalPlatformPlugin.bundle/Contents/Frameworks/SWBUniversalPlatform.framework/Resources:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/local/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/local/bin:/Users/anvarsalakhov/Desktop/Work/flutter/bin:/Users/anvarsalakhov/.rbenv/shims:/Users/anvarsalakhov/.rbenv/bin:/Users/anvarsalakhov/.nvm/versions/node/v22.16.0/bin:/usr/local/bin/dotnet:/usr/share/dotnet:/usr/local/share/dotnet:/Users/anvarsalakhov/.gem/ruby/3.2.0/bin:/Users/anvarsalakhov/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/anvarsalakhov/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/Users/anvarsalakhov/Desktop/Work/flutter/bin/:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/anvarsalakhov/.sdkman/candidates/gradle/current/bin:/Users/anvarsalakhov/.rvm/bin:/Users/anvarsalakhov/.pub-cache/bin HOME=/Users/anvarsalakhov /Users/anvarsalakhov/Desktop/Work/flutter/bin/cache/dart-sdk/bin/dart '--packages=/Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/package_config.json' '/Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/objective_c/0b28f89409983829d6356966c2c3da83/hook.dill' '--config=/Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/objective_c/0b28f89409983829d6356966c2c3da83/input.json' )`.
+INFO: 2026-03-23 15:40:08.066563: Running `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --version`.
+
+INFO: 2026-03-23 15:40:08.239121: Running `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --version`.
+
+INFO: 2026-03-23 15:40:08.254387: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/include/dart_api_dl.c -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-03-23 15:40:08.254808: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c.c -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c.c.o
+
+INFO: 2026-03-23 15:40:08.255112: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/input_stream_adapter.m -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-23 15:40:08.255476: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/observer.m -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/observer.m.o
+
+.m.o
+
+INFO: 2026-03-23 15:40:08.255592: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/ns_number.m -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/ns_number.m.o
+
+INFO: 2026-03-23 15:40:08.255704: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/protocol.m -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/protocol.m.o
+
+INFO: 2026-03-23 15:40:08.255821: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 -x objective-c -fobjc-arc -c /Users/anvarsalakhov/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c_bindings_generated.m -fpic -I src -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-23 15:40:08.409051: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/include/dart_api_dl.c.o
+
+/shared/objective_c/build/0b28f89409/obj/src/objective_c.c.o
+
+INFO: 2026-03-23 15:40:08.414509: 
+INFO: 2026-03-23 15:40:08.414587: 
+INFO: 2026-03-23 15:40:08.414646: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/observer.m.o
+
+INFO: 2026-03-23 15:40:08.421152: 
+INFO: 2026-03-23 15:40:08.421197: 
+INFO: 2026-03-23 15:40:08.421208: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/protocol.m.o
+
+INFO: 2026-03-23 15:40:08.571546: 
+INFO: 2026-03-23 15:40:08.571650: 
+INFO: 2026-03-23 15:40:08.571687: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/ns_number.m.o
+
+INFO: 2026-03-23 15:40:08.583847: 
+INFO: 2026-03-23 15:40:08.583934: 
+INFO: 2026-03-23 15:40:08.583965: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c.m.o
+
+INFO: 2026-03-23 15:40:08.588145: 
+INFO: 2026-03-23 15:40:08.588322: 
+INFO: 2026-03-23 15:40:08.588372: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-23 15:40:08.604666: 
+INFO: 2026-03-23 15:40:08.604705: 
+INFO: 2026-03-23 15:40:08.604716: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-23 15:40:08.605131: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.1.sdk -target arm64-apple-ios -mios-version-min=12 /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/include/dart_api_dl.c.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c.c.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/input_stream_adapter.m.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c.m.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/observer.m.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/ns_number.m.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/protocol.m.o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/obj/src/objective_c_bindings_generated.m.o -o /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/objective_c.dylib
+
+INFO: 2026-03-23 15:40:08.730686: 
+INFO: 2026-03-23 15:40:08.730752: ld: warning: -undefined dynamic_lookup is deprecated on iOS
+
+INFO: 2026-03-23 15:40:08.730765: Generated /Users/anvarsalakhov/Desktop/Work/iOS Project/flut_The Chamber Tower/.dart_tool/hooks_runner/shared/objective_c/build/0b28f89409/objective_c.dylib
+
