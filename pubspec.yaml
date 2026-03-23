@@ -13,6 +13,8 @@ dependencies:
   path_provider: ^2.1.0
   webview_flutter: ^4.10.0
   webview_flutter_wkwebview: ^3.23.1
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

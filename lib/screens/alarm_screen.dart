@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import '../theme/app_colors.dart';
 import '../services/storage_service.dart';
+import '../services/alarm_service.dart';
 import '../widgets/outlined_text.dart';
 
 class AlarmScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class AlarmScreen extends StatefulWidget {
 
 class _AlarmScreenState extends State<AlarmScreen> {
   final _storage = StorageService();
+  final _alarm = AlarmService();
   int _alarmHour = 7;
   int _alarmMinute = 0;
   int _sleepGoal = 8;
@@ -88,6 +90,9 @@ class _AlarmScreenState extends State<AlarmScreen> {
                               _alarmMinute = dt.minute;
                             });
                             _storage.setAlarmTime(dt.hour, dt.minute);
+                            if (_alarmEnabled) {
+                              _alarm.scheduleAlarm(dt.hour, dt.minute);
+                            }
                           },
                         ),
                       ),
@@ -97,9 +102,17 @@ class _AlarmScreenState extends State<AlarmScreen> {
                     // Set Alarm button
                     CupertinoButton(
                       padding: EdgeInsets.zero,
-                      onPressed: () {
-                        setState(() => _alarmEnabled = !_alarmEnabled);
-                        _storage.setAlarmEnabled(_alarmEnabled);
+                      onPressed: () async {
+                        final newEnabled = !_alarmEnabled;
+                        if (newEnabled) {
+                          final granted = await _alarm.requestPermissions();
+                          if (!granted) return;
+                          await _alarm.scheduleAlarm(_alarmHour, _alarmMinute);
+                        } else {
+                          await _alarm.cancelAlarm();
+                        }
+                        setState(() => _alarmEnabled = newEnabled);
+                        _storage.setAlarmEnabled(newEnabled);
                       },
                       child: Container(
                         width: double.infinity,
