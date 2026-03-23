@@ -40,6 +40,12 @@ class StorageService {
     await _p.setInt('alarm_minute', minute);
   }
 
+  bool isAlarmEnabled() => _p.getBool('alarm_enabled') ?? false;
+
+  Future<void> setAlarmEnabled(bool enabled) async {
+    await _p.setBool('alarm_enabled', enabled);
+  }
+
   int getSleepGoal() => _p.getInt('sleep_goal') ?? 8;
 
   Future<void> setSleepGoal(int hours) async {

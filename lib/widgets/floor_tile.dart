@@ -17,13 +17,29 @@ class FloorTile extends StatelessWidget {
     required this.width,
   });
 
+  // Rainbow gradient colors per floor
+  static const _rainbowGradients = [
+    [Color(0xFFE57373), Color(0xFFEF5350)], // 0 - Red
+    [Color(0xFFFFB74D), Color(0xFFFFA726)], // 1 - Orange
+    [Color(0xFFFFD54F), Color(0xFFFFCA28)], // 2 - Yellow
+    [Color(0xFF81C784), Color(0xFF66BB6A)], // 3 - Green
+    [Color(0xFF4FC3F7), Color(0xFF29B6F6)], // 4 - Light Blue
+    [Color(0xFF7986CB), Color(0xFF5C6BC0)], // 5 - Indigo
+    [Color(0xFFBA68C8), Color(0xFFAB47BC)], // 6 - Purple
+    [Color(0xFFFFD700), Color(0xFFFFC107)], // 7 - Gold crown
+  ];
+
   @override
   Widget build(BuildContext context) {
     final idx = floorIndex.clamp(0, 7);
-    final primary =
-        isBuilt ? AppColors.floorPrimary[idx] : AppColors.inactive;
-    final secondary =
-        isBuilt ? AppColors.floorSecondary[idx] : AppColors.inactiveBorder;
+    final rainbowPrimary = _rainbowGradients[idx][0];
+    final rainbowSecondary = _rainbowGradients[idx][1];
+    final primary = isBuilt
+        ? rainbowPrimary
+        : Color.lerp(rainbowPrimary, AppColors.inactive, 0.7)!;
+    final secondary = isBuilt
+        ? rainbowSecondary
+        : Color.lerp(rainbowSecondary, AppColors.inactiveBorder, 0.7)!;
     final name = AppColors.floorNames[idx];
     final emoji = AppColors.floorEmojis[idx];
     final deco = AppColors.floorDecorations[idx];
@@ -48,14 +64,14 @@ class FloorTile extends StatelessWidget {
         ),
         border: Border.all(
           color: isBuilt
-              ? secondary.withValues(alpha: 0.6)
-              : AppColors.inactiveBorder,
+              ? rainbowSecondary.withValues(alpha: 0.6)
+              : secondary.withValues(alpha: 0.5),
           width: 1.5,
         ),
         boxShadow: isBuilt
             ? [
                 BoxShadow(
-                  color: primary.withValues(alpha: 0.35),
+                  color: rainbowPrimary.withValues(alpha: 0.35),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),

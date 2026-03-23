@@ -15,6 +15,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
   int _alarmHour = 7;
   int _alarmMinute = 0;
   int _sleepGoal = 8;
+  bool _alarmEnabled = false;
   bool _loaded = false;
 
   @override
@@ -29,6 +30,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
       _alarmHour = _storage.getAlarmHour();
       _alarmMinute = _storage.getAlarmMinute();
       _sleepGoal = _storage.getSleepGoal();
+      _alarmEnabled = _storage.isAlarmEnabled();
       _loaded = true;
     });
   }
@@ -90,6 +92,59 @@ class _AlarmScreenState extends State<AlarmScreen> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 14),
+
+                    // Set Alarm button
+                    CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        setState(() => _alarmEnabled = !_alarmEnabled);
+                        _storage.setAlarmEnabled(_alarmEnabled);
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: _alarmEnabled
+                                ? [AppColors.forestGreen, AppColors.darkGreen]
+                                : [AppColors.golden, AppColors.warmOrange],
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: (_alarmEnabled
+                                      ? AppColors.forestGreen
+                                      : AppColors.golden)
+                                  .withValues(alpha: 0.4),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _alarmEnabled ? '✅' : '⏰',
+                              style: const TextStyle(fontSize: 22),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              _alarmEnabled
+                                  ? 'Alarm Set — ${_formatTime(_alarmHour, _alarmMinute)}'
+                                  : 'Set Alarm',
+                              style: const TextStyle(
+                                color: CupertinoColors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(height: 14),
                     _buildPanel(
                       title: 'Tower Height Goal',
