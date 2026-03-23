@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		BpCW8tlWwv22WEfskNlrY/X6hM4=
+		fJbWlVIxSKai2uLNGPnPMepB8bM=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		j1C+PUlTAKqJ+m3r81jGUYZ/SwQ=
+		8w6R0c0vABrtkC5BGmCoJ3RIFaw=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		A2l9m9NmrAF4C31gSLf0Fst3O6w=
+		JcI/pqm112sXt6lD+wpzMtREvyw=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NativeAssetsManifest.json</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		9axgtvwhVtM1U/4ZQyeimkRL0AI=
+		xoBv2KYeai+mvdCqILdcsjwJKak=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -200,6 +200,26 @@
 		<data>
 		ipm8hg7aB3LzsfShJfpNR0QQ4hw=
 		</data>
+		<key>Frameworks/flutter_local_notifications.framework/Info.plist</key>
+		<data>
+		2OSxzKFlIIpH8R02GHR1R5+sycA=
+		</data>
+		<key>Frameworks/flutter_local_notifications.framework/_CodeSignature/CodeResources</key>
+		<data>
+		P5kXVHW6fO9+GXNBZJN3DF212Vo=
+		</data>
+		<key>Frameworks/flutter_local_notifications.framework/flutter_local_notifications</key>
+		<data>
+		0R1A4imr9kt0aPo4+ND8uPNiAQM=
+		</data>
+		<key>Frameworks/flutter_local_notifications.framework/flutter_local_notifications_privacy.bundle/Info.plist</key>
+		<data>
+		NAocLQmc4m+VPNwZoQ+eHjLubkA=
+		</data>
+		<key>Frameworks/flutter_local_notifications.framework/flutter_local_notifications_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		TACQAjNH8aZiPGPN1ibJPOzuF+k=
+		</data>
 		<key>Frameworks/image_picker_ios.framework/Info.plist</key>
 		<data>
 		GD16V0iFzkHkv6zAvIO7xxxLNxk=
@@ -274,7 +294,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5FOLVNcmxm3jFJybFOw3gzxLeBU=
+		MAtR/egV1BfhJpAyU8hHj6dWG0Y=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -282,7 +302,7 @@
 		</data>
 		<key>Runner.debug.dylib</key>
 		<data>
-		E1jiLnEFCIO6PM8KY5pDedolxSk=
+		Jc67MzN3b2A2vQDD82ELXbkYFfI=
 		</data>
 		<key>__preview.dylib</key>
 		<data>
@@ -365,7 +385,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			n78ZT8MeSUjAt3wop+mr+k5knCQ5NwriiTVypcxjyM0=
+			iBbeKFjBmqHxokqfOuvNNcAgr2EmyLqBqUBCT51t6xw=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -379,7 +399,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Zx9Bd6EnhTHSmtmtMJQlLN+QrahMIWcz4/ftjXvhKII=
+			lPlOTK2i7GFbwMWnH0aPNJwuzILe6+DylpkdGkJLYv4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -400,7 +420,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4f1PpSmU+q05yqbFdt+t8NWacvK6Ol1AenHol3LiRbI=
+			i9/ajTvgCQXnOgeIK07Ua7zkrbsDMNtrARxUzsGy8/0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NativeAssetsManifest.json</key>
@@ -428,7 +448,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/QxDBTINkbOfLCrNp2nWx6roIyt5hW3W9GWaDncpO+E=
+			iltPQbyBcrKeQL+56gz3iNrM34ccqC6AGhc086D4IZ4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -634,6 +654,41 @@
 			wSU3Ai74GJkae/7UGnbY1q6WL/vA5lEax2Kl0IRef3w=
 			</data>
 		</dict>
+		<key>Frameworks/flutter_local_notifications.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Ka840aHK8pCJnZQDSsQfXlguOhy6oTvR95FV8o7VDjQ=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_local_notifications.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CcZwxDdoBKLtBb9mIGK9lSFPrDnwB0/ElaXTvi5tW4s=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_local_notifications.framework/flutter_local_notifications</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rMS987fEAsZdhdWjA4ICzcV6zJI2CpmnZ8VMEtsg4WE=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_local_notifications.framework/flutter_local_notifications_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XnEMHSjMBJm0jJ7GBsysxa6dU1e+8lXi4H4TVs5qfPU=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_local_notifications.framework/flutter_local_notifications_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			j0y/Om8Yt96qvIZGvSVd9FPw0QDe8HTsBeREY0N76dU=
+			</data>
+		</dict>
 		<key>Frameworks/image_picker_ios.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -764,7 +819,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wSmwScXDVmdguRwXsa4ryMt4NSomsJujwpU22vuifqA=
+			p6zqMokoC0/BWSGPKfEE+Vv0PMFGX4SN4naSYFGZZxk=
 			</data>
 		</dict>
 		<key>__preview.dylib</key>
