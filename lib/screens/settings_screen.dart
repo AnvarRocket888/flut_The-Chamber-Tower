@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import '../theme/app_colors.dart';
 import '../services/storage_service.dart';
+import 'tutorial_screen.dart';
+import 'privacy_policy_screen.dart';
 
 
 class SettingsScreen extends StatefulWidget {
@@ -169,6 +171,78 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 'Version',
                 '1.0.0',
                 AppColors.textSecondary,
+              ),
+
+              const SizedBox(height: 8),
+
+              // Tutorial button
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                child: CupertinoButton(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  color: AppColors.darkCard,
+                  borderRadius: BorderRadius.circular(12),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (_) => const TutorialScreen(),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '📖 How to Use',
+                        style: TextStyle(
+                          color: CupertinoColors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Icon(
+                        CupertinoIcons.chevron_right,
+                        color: AppColors.textSecondary,
+                        size: 16,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // Privacy Policy button
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                child: CupertinoButton(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  color: AppColors.darkCard,
+                  borderRadius: BorderRadius.circular(12),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (_) => const PrivacyPolicyScreen(),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '🔒 Privacy Policy',
+                        style: TextStyle(
+                          color: CupertinoColors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Icon(
+                        CupertinoIcons.chevron_right,
+                        color: AppColors.textSecondary,
+                        size: 16,
+                      ),
+                    ],
+                  ),
+                ),
               ),
 
               const SizedBox(height: 24),
