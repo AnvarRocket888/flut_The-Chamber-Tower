@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/sleep_session.dart';
 
@@ -8,6 +9,9 @@ class StorageService {
   StorageService._();
 
   SharedPreferences? _prefs;
+
+  /// Notifies listeners when sessions change (e.g. new session saved)
+  static final sessionUpdated = ValueNotifier<int>(0);
 
   Future<void> init() async {
     _prefs ??= await SharedPreferences.getInstance();
@@ -72,6 +76,7 @@ class StorageService {
     }
     final json = jsonEncode(sessions.map((e) => e.toJson()).toList());
     await _p.setString('sleep_sessions', json);
+    sessionUpdated.value++;
   }
 
   // ── User profile ──
@@ -101,6 +106,14 @@ class StorageService {
     } else {
       await _p.setInt('current_streak', 0);
     }
+  }
+
+  // ── First launch ──
+
+  bool isFirstLaunch() => _p.getBool('first_launch_done') != true;
+
+  Future<void> setFirstLaunchDone() async {
+    await _p.setBool('first_launch_done', true);
   }
 
   // ── Reset ──

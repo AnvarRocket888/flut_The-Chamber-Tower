@@ -4,6 +4,8 @@ import 'screens/tower_screen.dart';
 import 'screens/alarm_screen.dart';
 import 'screens/history_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/welcome_screen.dart';
+import 'services/storage_service.dart';
 
 class ClearApp extends StatelessWidget {
   const ClearApp({super.key});
@@ -17,8 +19,50 @@ class ClearApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: AppColors.golden,
       ),
-      home: const MainScreen(),
+      home: const AppEntry(),
     );
+  }
+}
+
+class AppEntry extends StatefulWidget {
+  const AppEntry({super.key});
+
+  @override
+  State<AppEntry> createState() => _AppEntryState();
+}
+
+class _AppEntryState extends State<AppEntry> {
+  bool _showWelcome = false;
+  bool _checked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstLaunch();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    final storage = StorageService();
+    await storage.init();
+    setState(() {
+      _showWelcome = storage.isFirstLaunch();
+      _checked = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_checked) {
+      return const CupertinoPageScaffold(
+        child: Center(child: CupertinoActivityIndicator()),
+      );
+    }
+    if (_showWelcome) {
+      return WelcomeScreen(
+        onComplete: () => setState(() => _showWelcome = false),
+      );
+    }
+    return const MainScreen();
   }
 }
 

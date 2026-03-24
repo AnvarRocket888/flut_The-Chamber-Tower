@@ -20,6 +20,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
   void initState() {
     super.initState();
     _load();
+    StorageService.sessionUpdated.addListener(_onSessionUpdated);
+  }
+
+  @override
+  void dispose() {
+    StorageService.sessionUpdated.removeListener(_onSessionUpdated);
+    super.dispose();
+  }
+
+  void _onSessionUpdated() {
+    _load();
   }
 
   Future<void> _load() async {
