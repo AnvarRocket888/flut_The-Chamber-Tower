@@ -92,7 +92,7 @@ class FloorTile extends StatelessWidget {
               name,
               style: TextStyle(
                 color: isBuilt
-                    ? CupertinoColors.white
+                    ? CupertinoColors.black
                     : AppColors.textSecondary.withValues(alpha: 0.4),
                 fontSize: 14,
                 fontWeight: isBuilt ? FontWeight.w600 : FontWeight.w400,
@@ -100,7 +100,7 @@ class FloorTile extends StatelessWidget {
                     ? [
                         Shadow(
                           color:
-                              CupertinoColors.black.withValues(alpha: 0.5),
+                              CupertinoColors.white.withValues(alpha: 0.5),
                           blurRadius: 4,
                         )
                       ]
