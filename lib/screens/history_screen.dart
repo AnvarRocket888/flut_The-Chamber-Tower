@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import '../theme/app_colors.dart';
 import '../models/sleep_session.dart';
@@ -383,6 +384,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
+                  if (session.selfiePhotoPath != null) ...[
+                    const SizedBox(height: 3),
+                    const Text(
+                      '📸 Selfie attached',
+                      style: TextStyle(
+                        color: AppColors.magicPink,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -547,6 +558,72 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   ],
                 ),
 
+                // Selfie preview
+                if (session.selfiePhotoPath != null) ...[
+                  const SizedBox(height: 14),
+                  GestureDetector(
+                    onTap: () => _showFullScreenSelfie(ctx, session.selfiePhotoPath!),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: AppColors.golden.withValues(alpha: 0.3),
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(13),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            Image.file(
+                              File(session.selfiePhotoPath!),
+                              height: 200,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (c, e, s) => Container(
+                                height: 100,
+                                color: AppColors.nightBlue,
+                                child: const Center(
+                                  child: Text(
+                                    '📸 Photo not found',
+                                    style: TextStyle(
+                                      color: AppColors.textSecondary,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                    const Color(0xCC000000),
+                                    const Color(0x00000000),
+                                  ],
+                                ),
+                              ),
+                              child: const Text(
+                                'Tap to view full size',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: CupertinoColors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+
                 if (session.dreamNote != null &&
                     session.dreamNote!.isNotEmpty) ...[
                   const SizedBox(height: 14),
@@ -599,6 +676,51 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showFullScreenSelfie(BuildContext parentCtx, String path) {
+    Navigator.of(parentCtx, rootNavigator: true).push(
+      CupertinoPageRoute(
+        fullscreenDialog: true,
+        builder: (fsCtx) => CupertinoPageScaffold(
+          backgroundColor: CupertinoColors.black,
+          navigationBar: CupertinoNavigationBar(
+            middle: const Text('📸 Morning Selfie'),
+            backgroundColor: const Color(0xDD000000),
+            leading: CupertinoButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => Navigator.pop(fsCtx),
+              child: const Text('Close',
+                  style: TextStyle(color: CupertinoColors.white)),
+            ),
+          ),
+          child: Center(
+            child: InteractiveViewer(
+              minScale: 0.5,
+              maxScale: 4.0,
+              child: Image.file(
+                File(path),
+                fit: BoxFit.contain,
+                errorBuilder: (c, e, s) => const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('📸', style: TextStyle(fontSize: 48)),
+                    SizedBox(height: 12),
+                    Text(
+                      'Photo not found',
+                      style: TextStyle(
+                        color: CupertinoColors.white,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
