@@ -137,4 +137,31 @@ class AlarmService {
       await scheduleAlarm(storage.getAlarmHour(), storage.getAlarmMinute());
     }
   }
+
+  /// Send a test notification after 5 seconds
+  Future<void> sendTestNotification() async {
+    final scheduledDate = tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
+
+    const iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+      sound: 'default',
+      interruptionLevel: InterruptionLevel.timeSensitive,
+    );
+
+    const details = NotificationDetails(iOS: iosDetails);
+
+    await _plugin.zonedSchedule(
+      99,
+      '🧪 Test Notification',
+      'If you see this, notifications work! 🏰',
+      scheduledDate,
+      details,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
+    debugPrint('Test notification scheduled for: $scheduledDate');
+  }
 }
