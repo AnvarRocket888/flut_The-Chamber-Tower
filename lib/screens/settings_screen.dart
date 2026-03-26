@@ -303,27 +303,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 totalSessions >= 30,
               ),
 
-              _sectionHeader('🧪 Testing'),
-              _testButton(
-                '➕ Add 3 Fake Sessions',
-                AppColors.forestGreen,
-                _addFakeSessions,
-              ),
-              _testButton(
-                '🔔 Test Notification',
-                AppColors.skyBlue,
-                _sendTestNotification,
-              ),
-              _testButton(
-                '👋 Reset Welcome Screen',
-                AppColors.warmOrange,
-                _resetWelcome,
-              ),
-              _testButton(
-                '🧹 Clear History',
-                AppColors.magicPink,
-                _clearHistory,
-              ),
+              // 🧪 Testing section hidden — methods kept for future use
+              // _sectionHeader('🧪 Testing'),
+              // _testButton('➕ Add 3 Fake Sessions', AppColors.forestGreen, _addFakeSessions),
+              // _testButton('🔔 Test Notification', AppColors.skyBlue, _sendTestNotification),
+              // _testButton('👋 Reset Welcome Screen', AppColors.warmOrange, _resetWelcome),
+              // _testButton('🧹 Clear History', AppColors.magicPink, _clearHistory),
 
               const SizedBox(height: 32),
 
