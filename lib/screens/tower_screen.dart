@@ -335,95 +335,6 @@ class _TowerScreenState extends State<TowerScreen> with WidgetsBindingObserver {
     );
   }
 
-  // ── Test sleep simulation ──
-
-  void _showTestSleepPicker() {
-    int testHours = 7;
-    showCupertinoModalPopup(
-      context: context,
-      builder: (ctx) => Container(
-        height: 300,
-        decoration: const BoxDecoration(
-          color: AppColors.darkCard,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () => Navigator.pop(ctx),
-                    child: const Text('Cancel'),
-                  ),
-                  const Text(
-                    '🧪 Simulate Sleep Hours',
-                    style: TextStyle(
-                      color: CupertinoColors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      _simulateSleep(testHours);
-                    },
-                    child: const Text('Done'),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: CupertinoPicker(
-                scrollController: FixedExtentScrollController(initialItem: 6),
-                magnification: 1.22,
-                squeeze: 1.2,
-                itemExtent: 40,
-                onSelectedItemChanged: (index) => testHours = index + 1,
-                children: List.generate(
-                  14,
-                  (i) => Center(
-                    child: Text(
-                      '${i + 1} hour${i > 0 ? 's' : ''}',
-                      style: const TextStyle(
-                        color: CupertinoColors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _simulateSleep(int hours) {
-    HapticFeedback.mediumImpact();
-    final wakeTime = DateTime.now();
-    final bedtime = wakeTime.subtract(Duration(hours: hours));
-    final floors = hours.clamp(0, _goalFloors);
-    final session = SleepSession(
-      id: 'test_${wakeTime.millisecondsSinceEpoch}',
-      bedtime: bedtime,
-      wakeTime: wakeTime,
-      floorsBuilt: floors,
-      goalFloors: _goalFloors,
-      moodEmoji: '😊',
-    );
-    setState(() {
-      _floorsBuilt = floors;
-    });
-    _showWakeUpSheet(session);
-  }
-
   // ── Build ──
 
   @override
@@ -655,23 +566,6 @@ class _TowerScreenState extends State<TowerScreen> with WidgetsBindingObserver {
                 color: CupertinoColors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        SizedBox(
-          width: double.infinity,
-          child: CupertinoButton(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            color: AppColors.forestGreen.withValues(alpha: 0.3),
-            borderRadius: BorderRadius.circular(14),
-            onPressed: _showTestSleepPicker,
-            child: const Text(
-              '🧪 Test: Simulate Sleep',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 14,
               ),
             ),
           ),
