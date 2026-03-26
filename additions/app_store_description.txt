@@ -1,11 +1,29 @@
-PRO TRACKING FISH - APP STORE DESCRIPTION
+THE CHAMBER TOWER - APP STORE DESCRIPTION
 
-APP NAME: Pro Tracking Fish
+APP NAME: The Chamber Tower
 
-SUBTITLE: Smart Aquarium Care & Fish Tracker
+SUBTITLE: Build Your Sleep, Floor by Floor
 
 DESCRIPTION:
-Transform aquarium care into an engaging experience! Track water parameters (temperature, pH, ammonia, nitrates, nitrites) with precision. Your virtual aquarium responds to real data - fish become vibrant with ideal conditions or show stress when parameters need attention. Built-in calculator for water changes, comprehensive statistics, and achievement system. Unlock rare fish species as you progress. Smart notifications for testing and feeding. Perfect for saltwater and freshwater tanks!
+Every night you go to sleep, you start building a tower. Each hour of rest adds one floor. Sleep the full eight hours and your tower stands tall and complete. Wake up early and you see exactly how many floors you missed.
+
+The idea is simple. Good sleep should feel like progress, not a chore. Instead of charts and numbers, you watch a colorful tower grow night after night. Each floor has its own name and color, from the Foundation Stone at the bottom to the Golden Crown at the top.
+
+When you wake up, the app asks how you feel. Pick a mood, take a morning selfie if you want, and write a short note about your dream. All of this gets saved to your history so you can look back and see how your sleep has changed over time.
+
+Set your alarm and sleep goal in the app. It will figure out the best bedtime for you and remind you when it is time to rest. The alarm works even when the app is closed.
+
+Your profile tracks everything. Total towers built, your longest streak of complete nights, and a gallery of all your morning photos. There is also a ranking system that gives you a title based on how many towers you have finished, starting from Newcomer and going all the way up to Celestial Architect.
+
+The settings screen shows your stats, sleep tips that change every time you visit, and a list of achievements you can unlock by sleeping well consistently.
+
+No accounts. No internet required. No ads. Just you and your tower.
 
 KEYWORDS:
-aquarium,fishcare,waterparameters,aquatracker,fishkeeper,waterquality,fishhealth,fishtank
+sleeptracker,sleepgoal,alarmclock,sleephabits,bedtimereminder,sleeplog,healthysleep,sleepapp
+
+PROMOTIONAL TEXT:
+Turn every night of good sleep into a floor of your personal tower. Track your rest, collect morning selfies, and watch your streak grow.
+
+WHAT'S NEW (v1.0.0):
+Initial release. Track sleep sessions, build towers floor by floor, set alarms with bedtime suggestions, capture morning selfies, log dreams and moods, earn achievements, and view detailed sleep history.
