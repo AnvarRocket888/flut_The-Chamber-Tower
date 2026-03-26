@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../theme/app_colors.dart';
+import '../models/sleep_session.dart';
+import '../services/alarm_service.dart';
 import '../services/storage_service.dart';
 import 'tutorial_screen.dart';
 import 'privacy_policy_screen.dart';
@@ -300,6 +303,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 totalSessions >= 30,
               ),
 
+              _sectionHeader('🧪 Testing'),
+              _testButton(
+                '➕ Add 3 Fake Sessions',
+                AppColors.forestGreen,
+                _addFakeSessions,
+              ),
+              _testButton(
+                '🔔 Test Notification',
+                AppColors.skyBlue,
+                _sendTestNotification,
+              ),
+              _testButton(
+                '👋 Reset Welcome Screen',
+                AppColors.warmOrange,
+                _resetWelcome,
+              ),
+              _testButton(
+                '🧹 Clear History',
+                AppColors.magicPink,
+                _clearHistory,
+              ),
+
               const SizedBox(height: 32),
 
               // Reset
@@ -430,6 +455,80 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
     );
+  }
+
+  Widget _testButton(String label, Color color, VoidCallback onPressed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      child: CupertinoButton(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        color: color.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(12),
+        onPressed: onPressed,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: CupertinoColors.white,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _addFakeSessions() async {
+    final moods = ['😊', '😴', '🥱', '😎', '🌟'];
+    final random = Random();
+    for (int i = 0; i < 3; i++) {
+      final bedtime = DateTime.now().subtract(Duration(days: i + 1, hours: 8));
+      final hours = 5 + random.nextInt(5);
+      final session = SleepSession(
+        id: '${DateTime.now().millisecondsSinceEpoch}_$i',
+        bedtime: bedtime,
+        wakeTime: bedtime.add(Duration(hours: hours)),
+        floorsBuilt: hours,
+        goalFloors: _storage.getSleepGoal(),
+        moodEmoji: moods[random.nextInt(moods.length)],
+      );
+      await _storage.saveSession(session);
+    }
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _sendTestNotification() async {
+    await AlarmService().sendTestNotification();
+  }
+
+  Future<void> _resetWelcome() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('first_launch_done');
+    if (!mounted) return;
+    showCupertinoDialog(
+      context: context,
+      builder: (ctx) => CupertinoAlertDialog(
+        title: const Text('Done'),
+        content: const Text('Welcome screen will show on next app launch.'),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _clearHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('sleep_sessions');
+    StorageService.sessionUpdated.value++;
+    if (mounted) setState(() {});
   }
 
   void _confirmReset() {
