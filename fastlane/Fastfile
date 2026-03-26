@@ -26,7 +26,7 @@ platform :ios do
     )
 
     main_app_bundle_id = ENV["IOS_BUNDLE_ID"]
-    extension_bundle_id = "#{ENV["IOS_BUNDLE_ID"]}.notifications"
+    extension_bundle_id = "#{ENV["IOS_BUNDLE_ID"]}.ntfs"
 
     match(
       type: "appstore",
@@ -46,7 +46,7 @@ desc "Sync codesigning certificates for Build"
     )
 
     main_app_bundle_id = ENV["IOS_BUNDLE_ID"]
-    extension_bundle_id = "#{ENV["IOS_BUNDLE_ID"]}.notifications"
+    extension_bundle_id = "#{ENV["IOS_BUNDLE_ID"]}.ntfs"
 
     match(
       type: "appstore",
@@ -81,8 +81,8 @@ desc "Sync codesigning certificates for Build"
       path: "ios/Runner.xcodeproj",
       targets: "notifications",
       team_id: ENV["APPLE_TEAM_ID"],
-      bundle_identifier: "#{ENV['IOS_BUNDLE_ID']}.notifications",
-      profile_name: ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.notifications_appstore_profile-name"],
+      bundle_identifier: "#{ENV['IOS_BUNDLE_ID']}.ntfs",
+      profile_name: ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.ntfs_appstore_profile-name"],
       code_sign_identity: "Apple Distribution"
     )
     
@@ -91,7 +91,7 @@ desc "Sync codesigning certificates for Build"
     
     # Get provisioning profile names from Match
     main_profile = ENV["sigh_#{ENV['IOS_BUNDLE_ID']}_appstore_profile-name"]
-    # extension_profile = ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.notifications_appstore_profile-name"]
+    # extension_profile = ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.ntfs_appstore_profile-name"]
     
     # Read, update and write ExportOptions.plist
     require 'plist'
@@ -114,7 +114,7 @@ desc "Sync codesigning certificates for Build"
     # Populate provisioningProfiles mapping
     export_options['provisioningProfiles'] = {
       ENV['IOS_BUNDLE_ID'] => main_profile
-      # "#{ENV['IOS_BUNDLE_ID']}.notifications" => extension_profile
+      # "#{ENV['IOS_BUNDLE_ID']}.ntfs" => extension_profile
     }
 
     File.write(export_options_path, export_options.to_plist)

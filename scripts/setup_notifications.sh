@@ -107,7 +107,7 @@ else
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.usernotifications.service</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
+		<string>$(PRODUCT_MODULE_NAME).ntfservice</string>
 	</dict>
 </dict>
 </plist>
