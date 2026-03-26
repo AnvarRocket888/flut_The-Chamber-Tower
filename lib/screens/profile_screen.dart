@@ -18,7 +18,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _storage = StorageService();
   String _userName = 'Dream Knight';
   String? _avatarPath;
+  String? _resolvedAvatarPath;
   List<SleepSession> _sessions = [];
+  Map<String, String> _resolvedSelfiePaths = {};
   bool _loaded = false;
 
   @override
@@ -29,12 +31,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _load() async {
     await _storage.init();
-    setState(() {
-      _userName = _storage.getUserName();
-      _avatarPath = _storage.getAvatarPath();
-      _sessions = _storage.getSessions();
-      _loaded = true;
-    });
+    _userName = _storage.getUserName();
+    _avatarPath = _storage.getAvatarPath();
+    _resolvedAvatarPath = await PhotoService.resolvePhotoPath(_avatarPath);
+    _sessions = _storage.getSessions();
+    // Pre-resolve all selfie paths
+    _resolvedSelfiePaths = {};
+    for (final s in _sessions) {
+      if (s.selfiePhotoPath != null) {
+        final resolved = await PhotoService.resolvePhotoPath(s.selfiePhotoPath);
+        if (resolved != null) {
+          _resolvedSelfiePaths[s.selfiePhotoPath!] = resolved;
+        }
+      }
+    }
+    setState(() => _loaded = true);
   }
 
   String get _rankTitle {
@@ -155,8 +166,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     }
 
-    final selfies =
-        _sessions.where((s) => s.selfiePhotoPath != null).toList();
+    final selfies = _sessions
+        .where((s) =>
+            s.selfiePhotoPath != null &&
+            _resolvedSelfiePaths.containsKey(s.selfiePhotoPath))
+        .toList();
 
     return CupertinoPageScaffold(
       child: Container(
@@ -224,10 +238,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       border: Border.all(color: AppColors.golden, width: 3),
                     ),
                     child: ClipOval(
-                      child: _avatarPath != null &&
-                              File(_avatarPath!).existsSync()
+                      child: _resolvedAvatarPath != null
                           ? Image.file(
-                              File(_avatarPath!),
+                              File(_resolvedAvatarPath!),
                               fit: BoxFit.cover,
                               width: 100,
                               height: 100,
@@ -377,26 +390,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   itemCount: selfies.length,
                   itemBuilder: (context, index) {
-                    final path = selfies[index].selfiePhotoPath!;
-                    final file = File(path);
-                    if (!file.existsSync()) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.inactive,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Center(
-                          child: Text('🖼️',
-                              style: TextStyle(fontSize: 24)),
-                        ),
-                      );
-                    }
+                    final storedPath = selfies[index].selfiePhotoPath!;
+                    final resolvedPath = _resolvedSelfiePaths[storedPath]!;
                     return GestureDetector(
-                      onTap: () => _showFullPhoto(context, path),
+                      onTap: () => _showFullPhoto(context, resolvedPath),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.file(
-                          file,
+                          File(resolvedPath),
                           fit: BoxFit.cover,
                         ),
                       ),

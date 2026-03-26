@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../theme/app_colors.dart';
 import '../models/sleep_session.dart';
 import '../services/storage_service.dart';
+import '../services/photo_service.dart';
 import '../widgets/outlined_text.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -559,70 +560,75 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ),
 
                 // Selfie preview
-                if (session.selfiePhotoPath != null) ...[
-                  const SizedBox(height: 14),
-                  GestureDetector(
-                    onTap: () => _showFullScreenSelfie(ctx, session.selfiePhotoPath!),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: AppColors.golden.withValues(alpha: 0.3),
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(13),
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            Image.file(
-                              File(session.selfiePhotoPath!),
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              errorBuilder: (c, e, s) => Container(
-                                height: 100,
-                                color: AppColors.nightBlue,
-                                child: const Center(
-                                  child: Text(
-                                    '📸 Photo not found',
-                                    style: TextStyle(
-                                      color: AppColors.textSecondary,
-                                      fontSize: 14,
+                if (session.selfiePhotoPath != null)
+                  Builder(builder: (_) {
+                    final resolvedPath = PhotoService.resolvePhotoPathSync(session.selfiePhotoPath);
+                    if (resolvedPath == null) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 14),
+                      child: GestureDetector(
+                        onTap: () => _showFullScreenSelfie(ctx, resolvedPath),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(
+                              color: AppColors.golden.withValues(alpha: 0.3),
+                            ),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(13),
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                Image.file(
+                                  File(resolvedPath),
+                                  height: 200,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (c, e, s) => Container(
+                                    height: 100,
+                                    color: AppColors.nightBlue,
+                                    child: const Center(
+                                      child: Text(
+                                        '📸 Photo not found',
+                                        style: TextStyle(
+                                          color: AppColors.textSecondary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 6),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    const Color(0xCC000000),
-                                    const Color(0x00000000),
-                                  ],
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(vertical: 6),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        const Color(0xCC000000),
+                                        const Color(0x00000000),
+                                      ],
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Tap to view full size',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: CupertinoColors.white,
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              child: const Text(
-                                'Tap to view full size',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: CupertinoColors.white,
-                                  fontSize: 12,
-                                ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
+                    );
+                  }),
 
                 if (session.dreamNote != null &&
                     session.dreamNote!.isNotEmpty) ...[

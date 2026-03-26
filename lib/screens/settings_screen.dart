@@ -1,10 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../theme/app_colors.dart';
 import '../services/storage_service.dart';
-import '../services/alarm_service.dart';
-import '../models/sleep_session.dart';
 import 'tutorial_screen.dart';
 import 'privacy_policy_screen.dart';
 
@@ -303,29 +300,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 totalSessions >= 30,
               ),
 
-              // Debug / Testing section
-              _sectionHeader('🧪 Testing'),
-              _debugButton(
-                '➕ Add 3 Fake Sleep Sessions',
-                AppColors.forestGreen,
-                _addFakeSessions,
-              ),
-              _debugButton(
-                '🔔 Send Test Notification (5s)',
-                AppColors.skyBlue,
-                _sendTestNotification,
-              ),
-              _debugButton(
-                '👋 Reset Welcome Screen',
-                AppColors.warmOrange,
-                _resetWelcome,
-              ),
-              _debugButton(
-                '🗑️ Clear History Only',
-                AppColors.magicPink,
-                _clearHistoryOnly,
-              ),
-
               const SizedBox(height: 32),
 
               // Reset
@@ -494,109 +468,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ? h - 12
         : (h == 0 ? 12 : h);
     return '${displayH.toString().padLeft(2, '0')}:${m.toString().padLeft(2, '0')} $period';
-  }
-
-  // ── Debug helpers ──
-
-  Widget _debugButton(String label, Color color, VoidCallback onPressed) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-      child: CupertinoButton(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        color: color.withValues(alpha: 0.25),
-        borderRadius: BorderRadius.circular(12),
-        onPressed: onPressed,
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: CupertinoColors.white,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _addFakeSessions() async {
-    final rng = Random();
-    final moods = ['😊', '😴', '🥱', '😎', '🌟', '😌'];
-    final dreams = [
-      'Flying over a castle',
-      'Swimming in the ocean',
-      'Walking through a forest',
-      null,
-      'Meeting a dragon',
-      null,
-    ];
-    for (int i = 0; i < 3; i++) {
-      final bedtime = DateTime.now().subtract(Duration(days: i + 1, hours: rng.nextInt(3)));
-      final wakeTime = bedtime.add(Duration(hours: 5 + rng.nextInt(4), minutes: rng.nextInt(60)));
-      final goal = _storage.getSleepGoal();
-      final hours = wakeTime.difference(bedtime).inMinutes / 60.0;
-      final floors = (hours / goal * goal).round().clamp(1, goal);
-      await _storage.saveSession(SleepSession(
-        id: 'fake_${DateTime.now().millisecondsSinceEpoch}_$i',
-        bedtime: bedtime,
-        wakeTime: wakeTime,
-        floorsBuilt: floors,
-        goalFloors: goal,
-        moodEmoji: moods[rng.nextInt(moods.length)],
-        dreamNote: dreams[rng.nextInt(dreams.length)],
-      ));
-    }
-    if (mounted) {
-      setState(() {});
-      _showToast('Added 3 fake sessions ✅');
-    }
-  }
-
-  void _sendTestNotification() async {
-    try {
-      await AlarmService().sendTestNotification();
-      _showToast('Notification in 5 seconds 🔔');
-    } catch (e) {
-      _showToast('Error: $e');
-    }
-  }
-
-  void _resetWelcome() async {
-    final prefs = _storage;
-    // Clear first_launch_done flag so welcome shows on next app start
-    await prefs.setFirstLaunchDone(); // need to undo it
-    // Actually we need to reset it — let's add a method or use raw prefs
-    final sp = await SharedPreferences.getInstance();
-    await sp.remove('first_launch_done');
-    if (mounted) _showToast('Welcome screen will show on next launch 👋');
-  }
-
-  void _clearHistoryOnly() async {
-    final sp = await SharedPreferences.getInstance();
-    await sp.remove('sleep_sessions');
-    StorageService.sessionUpdated.value++;
-    if (mounted) {
-      setState(() {});
-      _showToast('History cleared 🗑️');
-    }
-  }
-
-  void _showToast(String message) {
-    showCupertinoDialog(
-      context: context,
-      builder: (ctx) => CupertinoAlertDialog(
-        content: Text(message),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
   }
 }
