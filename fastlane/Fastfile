@@ -114,7 +114,7 @@ desc "Sync codesigning certificates for Build"
     # Populate provisioningProfiles mapping
     export_options['provisioningProfiles'] = {
       ENV['IOS_BUNDLE_ID'] => main_profile
-      # "#{ENV['IOS_BUNDLE_ID']}.ntfs" => extension_profile
+      # "#{ENV[IOS_BUNDLE_ID'']}.ntfs" => extension_profile
     }
 
     File.write(export_options_path, export_options.to_plist)
