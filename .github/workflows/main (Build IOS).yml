@@ -1,7 +1,7 @@
 name: Build Flutter iOS
 
-# on: workflow_dispatch
-on: push
+on: workflow_dispatch
+# on: push
 
 
 
@@ -257,42 +257,10 @@ jobs:
           retention-days: 30
       
       ###########################
-      #  Clean Flutter Cache   #
+      #       Cleanup           #
       ###########################
-      - name: Clean Flutter cache
-        run: flutter clean
-
-      ###########################
-      #  Verify AppIcon Setup  #
-      ###########################
-      - name: Verify AppIcon setup
+      - name: Clean up
+        if: always()
         run: |
-          if [ ! -d "ios/Runner/Assets.xcassets/AppIcon.appiconset" ]; then
-            echo "AppIcon.appiconset is missing!"
-            exit 1
-          fi
-          if [ ! -f "ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" ]; then
-            echo "Contents.json is missing in AppIcon.appiconset!"
-            exit 1
-          fi
-
-      ###########################
-      #  Update CocoaPods      #
-      ###########################
-      - name: Update CocoaPods
-        run: |
-          cd ios
-          pod repo update
-          pod install
-
-      ###########################
-      #  Build Flutter iOS     #
-      ###########################
-      - name: Build Flutter iOS
-        run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist --no-tree-shake-icons
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_DEPLOY_KEY: ${{ secrets.MATCH_DEPLOY_KEY }}
-          MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          IOS_BUNDLE_ID: ${{ secrets.IOS_BUNDLE_ID }}
+          rm -rf $HOME/.ssh/match_deploy_key || true
+          rm -rf $HOME/private_keys || true
