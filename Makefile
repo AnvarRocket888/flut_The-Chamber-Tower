@@ -85,11 +85,11 @@ setup-icon:
 	fi; \
 	echo "   Исходный файл: $$ICON_PATH"; \
 	mkdir -p $(ASSETS_DIR); \
-	for size in 29 40 57 58 60 80 87 114 120 180 1024; do \
+	for size in 20 29 40 57 58 60 76 80 87 114 120 152 167 180 1024; do \
 		echo "   Создание иконки $${size}x$${size}..."; \
 		sips -z $$size $$size "$$ICON_PATH" --out "$(ASSETS_DIR)/$$size.png" >/dev/null 2>&1; \
 	done; \
-	echo '{"images":[{"size":"60x60","expected-size":"180","filename":"180.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"40x40","expected-size":"80","filename":"80.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"40x40","expected-size":"120","filename":"120.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"60x60","expected-size":"120","filename":"120.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"57x57","expected-size":"57","filename":"57.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"1x"},{"size":"29x29","expected-size":"58","filename":"58.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"29x29","expected-size":"29","filename":"29.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"1x"},{"size":"29x29","expected-size":"87","filename":"87.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"57x57","expected-size":"114","filename":"114.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"20x20","expected-size":"40","filename":"40.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"20x20","expected-size":"60","filename":"60.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"1024x1024","filename":"1024.png","expected-size":"1024","idiom":"ios-marketing","folder":"Assets.xcassets/AppIcon.appiconset/","scale":"1x"}]}' > "$(ASSETS_DIR)/Contents.json"; \
+	echo '{"images":[{"size":"60x60","expected-size":"180","filename":"180.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"40x40","expected-size":"80","filename":"80.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"40x40","expected-size":"120","filename":"120.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"60x60","expected-size":"120","filename":"120.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"57x57","expected-size":"57","filename":"57.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"1x"},{"size":"29x29","expected-size":"58","filename":"58.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"29x29","expected-size":"29","filename":"29.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"1x"},{"size":"29x29","expected-size":"87","filename":"87.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"57x57","expected-size":"114","filename":"114.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"20x20","expected-size":"40","filename":"40.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"2x"},{"size":"20x20","expected-size":"60","filename":"60.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"iphone","scale":"3x"},{"size":"20x20","expected-size":"20","filename":"20.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"1x"},{"size":"20x20","expected-size":"40","filename":"40.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"2x"},{"size":"29x29","expected-size":"29","filename":"29.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"1x"},{"size":"29x29","expected-size":"58","filename":"58.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"2x"},{"size":"40x40","expected-size":"40","filename":"40.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"1x"},{"size":"40x40","expected-size":"80","filename":"80.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"2x"},{"size":"76x76","expected-size":"76","filename":"76.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"1x"},{"size":"76x76","expected-size":"152","filename":"152.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"2x"},{"size":"83.5x83.5","expected-size":"167","filename":"167.png","folder":"Assets.xcassets/AppIcon.appiconset/","idiom":"ipad","scale":"2x"},{"size":"1024x1024","filename":"1024.png","expected-size":"1024","idiom":"ios-marketing","folder":"Assets.xcassets/AppIcon.appiconset/","scale":"1x"}]}' > "$(ASSETS_DIR)/Contents.json"; \
 	echo "$(GREEN)   ✓ Иконки созданы и сохранены$(NC)"
 
 # Настройка версии приложения
@@ -224,23 +224,23 @@ remove-notifications:
 	@echo "$(YELLOW)🗑️  Удаление Notification Service Extension...$(NC)"
 	@if [ -d "$(NOTIFICATIONS_DIR)" ]; then \
 		rm -rf $(NOTIFICATIONS_DIR); \
-		echo "$(GREEN)   ✓ Директория .ntfs удалена$(NC)"; \
+		echo "$(GREEN)   ✓ Директория notifications удалена$(NC)"; \
 	else \
-		echo "$(YELLOW)   ⚠️  Директория .ntfs не найдена$(NC)"; \
+		echo "$(YELLOW)   ⚠️  Директория notifications не найдена$(NC)"; \
 	fi
 	@echo "$(YELLOW)   ⚠️  Для полного удаления NSE из project.pbxproj рекомендуется восстановить резервную копию$(NC)"
 	@echo "$(GREEN)✅ Удаление завершено$(NC)"
 
-# Добавление фреймворков в .ntfs target (Do not Embed)
+# Добавление фреймворков в notifications target (Do not Embed)
 # Добавляет: FirebaseMessaging.framework, FirebaseCore.framework, UserNotifications.framework
 .PHONY: setup-notifications-frameworks
 setup-notifications-frameworks:
-	@echo "$(YELLOW)🔗 Добавление фреймворков в .ntfs target...$(NC)"
+	@echo "$(YELLOW)🔗 Добавление фреймворков в notifications target...$(NC)"
 	@chmod +x scripts/add_notifications_frameworks.rb && ruby scripts/add_notifications_frameworks.rb
 
 # Настройка Push Notifications capability и Background Modes
 # Добавляет:
-# - Push Notifications capability для Runner и .ntfs targets
+# - Push Notifications capability для Runner и notifications targets
 # - Background Modes (Remote Notifications и Background fetch) в Runner
 .PHONY: setup-capabilities 
 setup-capabilities:
@@ -319,7 +319,7 @@ help:
 	@echo "  $(YELLOW)make setup-podfile$(NC)  - Заменить Podfile из шаблона"
 	@echo ""
 	@echo "  $(YELLOW)make setup-notifications$(NC)  - Добавить Notification Service Extension"
-	@echo "  $(YELLOW)make setup-notifications-frameworks$(NC) - Добавить фреймворки в ntfs target"
+	@echo "  $(YELLOW)make setup-notifications-frameworks$(NC) - Добавить фреймворки в notifications target"
 	@echo "  $(YELLOW)make update-notifications$(NC) - Обновить файлы NSE из путей в конфиге"
 	@echo "  $(YELLOW)make remove-notifications$(NC) - Удалить Notification Service Extension"
 	@echo ""
