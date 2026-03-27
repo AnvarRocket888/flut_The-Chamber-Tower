@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>method</key>
+    <string>app-store</string>
+    <key>teamID</key>
+    <string>5K7T2KVGPM</string>
+    <key>signingStyle</key>
+    <string>manual</string>
+    <key>uploadBitcode</key>
+    <false/>
+    <key>compileBitcode</key>
+    <false/>
+    
+    <!-- Основной таргет Runner -->
+    <key>signingCertificate</key>
+    <string>Apple Distribution</string>
+    
+    <key>provisioningProfiles</key>
+    <dict>
+        <!-- Bundle ID основного приложения -->
+        <key>com.mariageorgiou.thechambertower</key>
+        <string>The Chamber Tower</string>
+        
+        <!-- Bundle ID notification extension -->
+        <key>com.mariageorgiou.thechambertower.ntfs</key>
+        <string>The Chamber Tower Not</string>
+    </dict>
+</dict>
+</plist>
