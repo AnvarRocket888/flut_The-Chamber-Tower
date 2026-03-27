@@ -191,21 +191,6 @@ jobs:
           bundle exec fastlane ios beta
       
       ###########################
-      #  Sanitize filenames     #
-      ###########################
-      - name: Sanitize filenames for artifact upload
-        if: always()
-        run: |
-          # Remove characters not allowed by upload-artifact: " : < > | * ? \r \n
-          find build/ios -name '*:*' -o -name '*"*' -o -name '*<*' -o -name '*>*' -o -name '*|*' -o -name '*\**' -o -name '*\?*' 2>/dev/null | while IFS= read -r f; do
-            dir=$(dirname "$f")
-            base=$(basename "$f")
-            safe=$(echo "$base" | tr -d ':"<>|*?')
-            mv "$f" "$dir/$safe"
-            echo "Renamed: $base -> $safe"
-          done
-
-      ###########################
       #  Upload Xcode Archive   #
       ###########################
       - name: Upload Xcode archive
