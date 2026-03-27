@@ -9,6 +9,7 @@
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -17,22 +18,20 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and target
-# settings. You can delete this if you prefer to start from
-# scratch in each new VS Code session.
-.vscode/
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/.last_build_id
 .dart_tool/
-.flutter-plugins
 .flutter-plugins-dependencies
-.packages
 .pub-cache/
 .pub/
 /build/
-pubspec.lock
+/coverage/
 
 # Symbolication related
 app.*.symbols
@@ -44,16 +43,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# Platform specific
-**/ios/Pods/
-**/ios/Flutter/ephemeral/
-
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-
-# Icon
-# Icon.png
