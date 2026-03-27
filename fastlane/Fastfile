@@ -33,6 +33,8 @@ platform :ios do
       storage_mode: "git",
       git_url: "git@github.com:#{match_org}/#{match_repo}.git",
       app_identifier: [main_app_bundle_id, extension_bundle_id],
+
+
       api_key: api_key
     )
   end
@@ -76,15 +78,15 @@ desc "Sync codesigning certificates for Build"
     )
     
     # # Configure manual code signing for notification extension
-    update_code_signing_settings(
-      use_automatic_signing: false,
-      path: "ios/Runner.xcodeproj",
-      targets: "notifications",
-      team_id: ENV["APPLE_TEAM_ID"],
-      bundle_identifier: "#{ENV['IOS_BUNDLE_ID']}.ntfs",
-      profile_name: ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.ntfs_appstore_profile-name"],
-      code_sign_identity: "Apple Distribution"
-    )
+    # update_code_signing_settings(
+    #   use_automatic_signing: false,
+    #   path: "ios/Runner.xcodeproj",
+    #   targets: "notifications",
+    #   team_id: ENV["APPLE_TEAM_ID"],
+    #   bundle_identifier: "#{ENV['IOS_BUNDLE_ID']}.ntfs",
+    #   profile_name: ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.ntfs_appstore_profile-name"],
+    #   code_sign_identity: "Apple Distribution"
+    # )
     
     # Update ExportOptions.plist with Match provisioning profiles
     export_options_path = File.expand_path("../ios/ExportOptions.plist", __dir__)
