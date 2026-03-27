@@ -14,7 +14,7 @@ icon_path: "Icon.png"
 
 # Team ID для подписи (опционально)
 # Можно найти в Apple Developer Portal
-team_id: "5K7T2KVGPM"
+team_id: ""
 
 # Версия приложения
 app_version: "1.0.0"
