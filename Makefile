@@ -339,3 +339,46 @@ help:
 	@echo "  Отредактируйте файл $(CONFIG_FILE) перед запуском"
 
 .DEFAULT_GOAL := help
+
+# Generate all required iOS app icons for iPhone and iPad
+icons:
+	@echo "Generating iOS app icons..."
+	@mkdir -p ios/Runner/Assets.xcassets/AppIcon.appiconset
+	@cat <<-EOF > ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+	{
+	  "images": [
+	    {"idiom": "iphone", "size": "20x20", "scale": "2x", "filename": "icon-20@2x.png"},
+	    {"idiom": "iphone", "size": "20x20", "scale": "3x", "filename": "icon-20@3x.png"},
+	    {"idiom": "iphone", "size": "29x29", "scale": "2x", "filename": "icon-29@2x.png"},
+	    {"idiom": "iphone", "size": "29x29", "scale": "3x", "filename": "icon-29@3x.png"},
+	    {"idiom": "iphone", "size": "40x40", "scale": "2x", "filename": "icon-40@2x.png"},
+	    {"idiom": "iphone", "size": "40x40", "scale": "3x", "filename": "icon-40@3x.png"},
+	    {"idiom": "iphone", "size": "60x60", "scale": "2x", "filename": "icon-60@2x.png"},
+	    {"idiom": "iphone", "size": "60x60", "scale": "3x", "filename": "icon-60@3x.png"},
+	    {"idiom": "ipad", "size": "20x20", "scale": "1x", "filename": "icon-20.png"},
+	    {"idiom": "ipad", "size": "20x20", "scale": "2x", "filename": "icon-20@2x.png"},
+	    {"idiom": "ipad", "size": "29x29", "scale": "1x", "filename": "icon-29.png"},
+	    {"idiom": "ipad", "size": "29x29", "scale": "2x", "filename": "icon-29@2x.png"},
+	    {"idiom": "ipad", "size": "40x40", "scale": "1x", "filename": "icon-40.png"},
+	    {"idiom": "ipad", "size": "40x40", "scale": "2x", "filename": "icon-40@2x.png"},
+	    {"idiom": "ipad", "size": "76x76", "scale": "1x", "filename": "icon-76.png"},
+	    {"idiom": "ipad", "size": "76x76", "scale": "2x", "filename": "icon-76@2x.png"},
+	    {"idiom": "ipad", "size": "83.5x83.5", "scale": "2x", "filename": "icon-83.5@2x.png"},
+	    {"idiom": "ios-marketing", "size": "1024x1024", "scale": "1x", "filename": "icon-1024.png"}
+	  ],
+	  "info": {
+	    "version": 1,
+	    "author": "xcode"
+	  }
+	}
+	EOF
+	@echo "Contents.json created."
+	@for size in 20 29 40 60 76 83.5 1024; do \
+	  for scale in 1x 2x 3x; do \
+	    if [ "$$size" = "1024" ] && [ "$$scale" != "1x" ]; then continue; fi; \
+	    filename="icon-$$size@$$scale.png"; \
+	    touch ios/Runner/Assets.xcassets/AppIcon.appiconset/$$filename; \
+	    echo "Generated $$filename"; \
+	  done; \
+	done
+	@echo "All icons generated."
