@@ -36,10 +36,10 @@ target 'Runner' do
   end
 end
 
-  # If you have an app extension (e.g. .ntfs), declare it as a nested target
+  # If you have an app extension (e.g. notifications), declare it as a nested target
   # so CocoaPods knows the host target. This ensures proper pod installation for
   # embedded targets like extensions.
-  target '.ntfs' do
+  target 'ntfs' do
     use_frameworks!
     inherit! :search_paths
     pod 'Firebase/Messaging'
@@ -53,7 +53,7 @@ post_install do |installer|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
     end
     
-    if target.name == '.ntfs'
+    if target.name == 'ntfs'
       target.build_configurations.each do |config|
         config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'YES'
       end
