@@ -1,7 +1,7 @@
 name: Build Flutter iOS
 
-on: workflow_dispatch
-# on: push
+# on: workflow_dispatch
+on: push
 
 
 
