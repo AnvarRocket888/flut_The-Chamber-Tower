@@ -79,7 +79,7 @@ desc "Sync codesigning certificates for Build"
     update_code_signing_settings(
       use_automatic_signing: false,
       path: "ios/Runner.xcodeproj",
-      targets: ".ntfs",
+      targets: "ntfs",
       team_id: ENV["APPLE_TEAM_ID"],
       bundle_identifier: "#{ENV['IOS_BUNDLE_ID']}.ntfs",
       profile_name: ENV["sigh_#{ENV['IOS_BUNDLE_ID']}.ntfs_appstore_profile-name"],
