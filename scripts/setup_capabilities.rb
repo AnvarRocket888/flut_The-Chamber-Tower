@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 # Скрипт для добавления Push Notifications capability и Background Modes
-# в Runner и ntfs targets
+# в Runner и .ntfs targets
 
 require 'securerandom'
 
 PBXPROJ_PATH = 'ios/Runner.xcodeproj/project.pbxproj'
 RUNNER_DIR = 'ios/Runner'
-NOTIFICATIONS_DIR = 'ios/ntfs'
+NOTIFICATIONS_DIR = 'ios/.ntfs'
 RUNNER_ENTITLEMENTS = "#{RUNNER_DIR}/Runner.entitlements"
-NOTIFICATIONS_ENTITLEMENTS = "#{NOTIFICATIONS_DIR}/ntfs.entitlements"
+NOTIFICATIONS_ENTITLEMENTS = "#{NOTIFICATIONS_DIR}/.ntfs.entitlements"
 INFO_PLIST = "#{RUNNER_DIR}/Info.plist"
 
 GREEN = "\033[0;32m"
@@ -49,12 +49,12 @@ File.write(RUNNER_ENTITLEMENTS, runner_entitlements_content)
 puts "#{GREEN}   ✓ Runner.entitlements создан#{NC}"
 
 # ============================================
-# 2. Создаем/обновляем ntfs.entitlements
+# 2. Создаем/обновляем .ntfs.entitlements
 # ============================================
 if Dir.exist?(NOTIFICATIONS_DIR)
-  puts "#{YELLOW}📝 Настройка ntfs.entitlements...#{NC}"
+  puts "#{YELLOW}📝 Настройка .ntfs.entitlements...#{NC}"
   
-  ntfs_entitlements_content = <<-PLIST
+  notifications_entitlements_content = <<-PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -65,10 +65,10 @@ if Dir.exist?(NOTIFICATIONS_DIR)
 </plist>
 PLIST
 
-  File.write(NOTIFICATIONS_ENTITLEMENTS, ntfs_entitlements_content)
-  puts "#{GREEN}   ✓ ntfs.entitlements создан#{NC}"
+  File.write(NOTIFICATIONS_ENTITLEMENTS, notifications_entitlements_content)
+  puts "#{GREEN}   ✓ .ntfs.entitlements создан#{NC}"
 else
-  puts "#{YELLOW}   ⚠️  Директория ntfs не найдена, пропускаем...#{NC}"
+  puts "#{YELLOW}   ⚠️  Директория .ntfs не найдена, пропускаем...#{NC}"
 end
 
 # ============================================
@@ -100,29 +100,29 @@ else
 end
 
 # ============================================
-# 4. Добавляем ntfs.entitlements в проект
+# 4. Добавляем .ntfs.entitlements в проект
 # ============================================
-if Dir.exist?(NOTIFICATIONS_DIR) && !content.include?('ntfs.entitlements')
-  puts "#{YELLOW}🔧 Добавление ntfs.entitlements в проект...#{NC}"
+if Dir.exist?(NOTIFICATIONS_DIR) && !content.include?('.ntfs.entitlements')
+  puts "#{YELLOW}🔧 Добавление .ntfs.entitlements в проект...#{NC}"
   
   notif_entitlements_file_ref = generate_id
   
   # Добавляем PBXFileReference
   content.gsub!(/\/\* End PBXFileReference section \*\//) do
-    "\t\t#{notif_entitlements_file_ref} /* ntfs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ntfs.entitlements; sourceTree = \"<group>\"; };\n/* End PBXFileReference section */"
+    "\t\t#{notif_entitlements_file_ref} /* .ntfs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = .ntfs.entitlements; sourceTree = \"<group>\"; };\n/* End PBXFileReference section */"
   end
   
-  # Добавляем в ntfs group (NOTIF003000000000000001)
-  content.gsub!(/(NOTIF003000000000000001 \/\* ntfs \*\/ = \{[^}]*children = \()([^)]*\);)/) do
+  # Добавляем в .ntfs group (NOTIF003000000000000001)
+  content.gsub!(/(NOTIF003000000000000001 \/\* .ntfs \*\/ = \{[^}]*children = \()([^)]*\);)/) do
     prefix = $1
     files = $2
-    "#{prefix}\n\t\t\t\t#{notif_entitlements_file_ref} /* ntfs.entitlements */,#{files}"
+    "#{prefix}\n\t\t\t\t#{notif_entitlements_file_ref} /* .ntfs.entitlements */,#{files}"
   end
   
-  puts "#{GREEN}   ✓ ntfs.entitlements добавлен в проект#{NC}"
+  puts "#{GREEN}   ✓ .ntfs.entitlements добавлен в проект#{NC}"
 elsif Dir.exist?(NOTIFICATIONS_DIR)
-  notif_entitlements_file_ref = content.match(/(\w{24}) \/\* ntfs\.entitlements \*\//)&.[](1)
-  puts "#{YELLOW}   ⚠️  ntfs.entitlements уже в проекте#{NC}"
+  notif_entitlements_file_ref = content.match(/(\w{24}) \/\* \.ntfs\.entitlements \*\//)&.[](1)
+  puts "#{YELLOW}   ⚠️  .ntfs.entitlements уже в проекте#{NC}"
 end
 
 # ============================================
@@ -154,33 +154,33 @@ end
 puts "#{GREEN}   ✓ CODE_SIGN_ENTITLEMENTS настроен для Runner#{NC}"
 
 # ============================================
-# 6. Добавляем CODE_SIGN_ENTITLEMENTS в ntfs build settings
+# 6. Добавляем CODE_SIGN_ENTITLEMENTS в .ntfs build settings
 # ============================================
 if Dir.exist?(NOTIFICATIONS_DIR)
-  puts "#{YELLOW}🔐 Настройка CODE_SIGN_ENTITLEMENTS для ntfs...#{NC}"
+  puts "#{YELLOW}🔐 Настройка CODE_SIGN_ENTITLEMENTS для .ntfs...#{NC}"
   
-  # ntfs Debug (NOTIF014000000000000001)
+  # .ntfs Debug (NOTIF014000000000000001)
   unless content =~ /NOTIF014000000000000001.*?CODE_SIGN_ENTITLEMENTS/m
     content.gsub!(/(NOTIF014000000000000001 \/\* Debug \*\/ = \{[^}]*buildSettings = \{)/) do
-      "#{$1}\n\t\t\t\tCODE_SIGN_ENTITLEMENTS = ntfs/ntfs.entitlements;"
+      "#{$1}\n\t\t\t\tCODE_SIGN_ENTITLEMENTS = .ntfs/.ntfs.entitlements;"
     end
   end
   
-  # ntfs Release (NOTIF015000000000000001)
+  # .ntfs Release (NOTIF015000000000000001)
   unless content =~ /NOTIF015000000000000001.*?CODE_SIGN_ENTITLEMENTS/m
     content.gsub!(/(NOTIF015000000000000001 \/\* Release \*\/ = \{[^}]*buildSettings = \{)/) do
-      "#{$1}\n\t\t\t\tCODE_SIGN_ENTITLEMENTS = ntfs/ntfs.entitlements;"
+      "#{$1}\n\t\t\t\tCODE_SIGN_ENTITLEMENTS = .ntfs/.ntfs.entitlements;"
     end
   end
   
-  # ntfs Profile (NOTIF016000000000000001)
+  # .ntfs Profile (NOTIF016000000000000001)
   unless content =~ /NOTIF016000000000000001.*?CODE_SIGN_ENTITLEMENTS/m
     content.gsub!(/(NOTIF016000000000000001 \/\* Profile \*\/ = \{[^}]*buildSettings = \{)/) do
-      "#{$1}\n\t\t\t\tCODE_SIGN_ENTITLEMENTS = ntfs/ntfs.entitlements;"
+      "#{$1}\n\t\t\t\tCODE_SIGN_ENTITLEMENTS = .ntfs/.ntfs.entitlements;"
     end
   end
   
-  puts "#{GREEN}   ✓ CODE_SIGN_ENTITLEMENTS настроен для ntfs#{NC}"
+  puts "#{GREEN}   ✓ CODE_SIGN_ENTITLEMENTS настроен для .ntfs#{NC}"
 end
 
 # ============================================
@@ -237,9 +237,9 @@ puts "#{GREEN}✅ Capabilities настроены успешно!#{NC}"
 puts ""
 puts "#{YELLOW}📋 Добавлено:#{NC}"
 puts "   • Push Notifications capability для Runner"
-puts "   • Push Notifications capability для ntfs (если существует)"
-puts "   • Background Modes: Remote ntfs, Background fetch"
+puts "   • Push Notifications capability для .ntfs (если существует)"
+puts "   • Background Modes: Remote notifications, Background fetch"
 puts ""
 puts "#{YELLOW}⚠️  Примечание:#{NC}"
 puts "   После сборки для production измените aps-environment на 'production'"
-puts "   в файлах Runner.entitlements и ntfs.entitlements"
+puts "   в файлах Runner.entitlements и .ntfs.entitlements"

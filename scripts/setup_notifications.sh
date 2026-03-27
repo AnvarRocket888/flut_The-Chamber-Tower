@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 # Переменные
 CONFIG_FILE="project_config.yaml"
 IOS_DIR="ios"
-NOTIFICATIONS_DIR="${IOS_DIR}/ntfs"
+NOTIFICATIONS_DIR="${IOS_DIR}/.ntfs"
 PBXPROJ="${IOS_DIR}/Runner.xcodeproj/project.pbxproj"
 
 # Функция для чтения значения из конфига
@@ -32,7 +32,7 @@ echo -e "${YELLOW}🔔 Добавление Notification Service Extension...${N
 echo "   NSE Bundle ID: $NSE_BUNDLE_ID"
 
 # Создание директории
-echo -e "${YELLOW}   Создание директории ntfs...${NC}"
+echo -e "${YELLOW}   Создание директории .ntfs...${NC}"
 mkdir -p "$NOTIFICATIONS_DIR"
 
 # Создание или копирование NotificationService.swift
@@ -87,7 +87,7 @@ else
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>ntfs</string>
+	<string>.ntfs</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -107,7 +107,7 @@ else
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.usernotifications.service</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>$(PRODUCT_MODULE_NAME).ntfservice</string>
+		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
 	</dict>
 </dict>
 </plist>
@@ -115,7 +115,7 @@ PLIST_EOF
 fi
 
 # Проверка, не добавлен ли уже NSE
-if grep -q "ntfs.appex" "$PBXPROJ"; then
+if grep -q ".ntfs.appex" "$PBXPROJ"; then
     echo -e "${YELLOW}   ⚠️  Notification Service Extension уже существует${NC}"
     exit 0
 fi
@@ -143,7 +143,7 @@ NSE_CONFIG_LIST_ID="NOTIF017000000000000001"
 
 # PBXBuildFile section
 sed -i '' "s|/\* End PBXBuildFile section \*/|		${NSE_BUILD_FILE_ID} /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ${NSE_FILE_REF_ID} /* NotificationService.swift */; };\\
-		${NSE_COPY_BUILD_FILE_ID} /* ntfs.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ${NSE_PRODUCT_REF_ID} /* ntfs.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };\\
+		${NSE_COPY_BUILD_FILE_ID} /* .ntfs.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ${NSE_PRODUCT_REF_ID} /* .ntfs.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };\\
 /* End PBXBuildFile section */|" "$PBXPROJ"
 
 # PBXContainerItemProxy section
@@ -152,7 +152,7 @@ sed -i '' "s|/\* End PBXContainerItemProxy section \*/|		${NSE_CONTAINER_PROXY_I
 			containerPortal = 97C146E61CF9000F007C117D /* Project object */;\\
 			proxyType = 1;\\
 			remoteGlobalIDString = ${NSE_TARGET_ID};\\
-			remoteInfo = ntfs;\\
+			remoteInfo = .ntfs;\\
 		};\\
 /* End PBXContainerItemProxy section */|" "$PBXPROJ"
 
@@ -163,7 +163,7 @@ sed -i '' "s|/\* End PBXCopyFilesBuildPhase section \*/|		${NSE_COPY_FILES_ID} /
 			dstPath = \"\";\\
 			dstSubfolderSpec = 13;\\
 			files = (\\
-				${NSE_COPY_BUILD_FILE_ID} /* ntfs.appex in Embed App Extensions */,\\
+				${NSE_COPY_BUILD_FILE_ID} /* .ntfs.appex in Embed App Extensions */,\\
 			);\\
 			name = \"Embed App Extensions\";\\
 			runOnlyForDeploymentPostprocessing = 0;\\
@@ -173,33 +173,33 @@ sed -i '' "s|/\* End PBXCopyFilesBuildPhase section \*/|		${NSE_COPY_FILES_ID} /
 # PBXFileReference section
 sed -i '' "s|/\* End PBXFileReference section \*/|		${NSE_FILE_REF_ID} /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = \"<group>\"; };\\
 		${NSE_PLIST_REF_ID} /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = \"<group>\"; };\\
-		${NSE_PRODUCT_REF_ID} /* ntfs.appex */ = {isa = PBXFileReference; explicitFileType = \"wrapper.app-extension\"; includeInIndex = 0; path = ntfs.appex; sourceTree = BUILT_PRODUCTS_DIR; };\\
+		${NSE_PRODUCT_REF_ID} /* .ntfs.appex */ = {isa = PBXFileReference; explicitFileType = \"wrapper.app-extension\"; includeInIndex = 0; path = .ntfs.appex; sourceTree = BUILT_PRODUCTS_DIR; };\\
 /* End PBXFileReference section */|" "$PBXPROJ"
 
 # Add to Products group
 sed -i '' "s|97C146EE1CF9000F007C117D /\* Runner.app \*/,|97C146EE1CF9000F007C117D /* Runner.app */,\\
-				${NSE_PRODUCT_REF_ID} /* ntfs.appex */,|" "$PBXPROJ"
+				${NSE_PRODUCT_REF_ID} /* .ntfs.appex */,|" "$PBXPROJ"
 
-# Add ntfs group reference to main group
-sed -i '' "s|331C8082294A63A400263BE5 /\* RunnerTests \*/,|${NSE_GROUP_ID} /* ntfs */,\\
+# Add .ntfs group reference to main group
+sed -i '' "s|331C8082294A63A400263BE5 /\* RunnerTests \*/,|${NSE_GROUP_ID} /* .ntfs */,\\
 				331C8082294A63A400263BE5 /* RunnerTests */,|" "$PBXPROJ"
 
-# PBXGroup section - add ntfs group
-sed -i '' "s|/\* End PBXGroup section \*/|		${NSE_GROUP_ID} /* ntfs */ = {\\
+# PBXGroup section - add .ntfs group
+sed -i '' "s|/\* End PBXGroup section \*/|		${NSE_GROUP_ID} /* .ntfs */ = {\\
 			isa = PBXGroup;\\
 			children = (\\
 				${NSE_FILE_REF_ID} /* NotificationService.swift */,\\
 				${NSE_PLIST_REF_ID} /* Info.plist */,\\
 			);\\
-			path = ntfs;\\
+			path = .ntfs;\\
 			sourceTree = \"<group>\";\\
 		};\\
 /* End PBXGroup section */|" "$PBXPROJ"
 
 # PBXNativeTarget section
-sed -i '' "s|/\* End PBXNativeTarget section \*/|		${NSE_TARGET_ID} /* ntfs */ = {\\
+sed -i '' "s|/\* End PBXNativeTarget section \*/|		${NSE_TARGET_ID} /* .ntfs */ = {\\
 			isa = PBXNativeTarget;\\
-			buildConfigurationList = ${NSE_CONFIG_LIST_ID} /* Build configuration list for PBXNativeTarget \"ntfs\" */;\\
+			buildConfigurationList = ${NSE_CONFIG_LIST_ID} /* Build configuration list for PBXNativeTarget \".ntfs\" */;\\
 			buildPhases = (\\
 				${NSE_SOURCES_ID} /* Sources */,\\
 				${NSE_FRAMEWORKS_ID} /* Frameworks */,\\
@@ -209,16 +209,16 @@ sed -i '' "s|/\* End PBXNativeTarget section \*/|		${NSE_TARGET_ID} /* ntfs */ =
 			);\\
 			dependencies = (\\
 			);\\
-			name = ntfs;\\
-			productName = ntfs;\\
-			productReference = ${NSE_PRODUCT_REF_ID} /* ntfs.appex */;\\
+			name = .ntfs;\\
+			productName = .ntfs;\\
+			productReference = ${NSE_PRODUCT_REF_ID} /* .ntfs.appex */;\\
 			productType = \"com.apple.product-type.app-extension\";\\
 		};\\
 /* End PBXNativeTarget section */|" "$PBXPROJ"
 
 # Add target to project targets list
 sed -i '' "s|97C146ED1CF9000F007C117D /\* Runner \*/,|97C146ED1CF9000F007C117D /* Runner */,\\
-				${NSE_TARGET_ID} /* ntfs */,|" "$PBXPROJ"
+				${NSE_TARGET_ID} /* .ntfs */,|" "$PBXPROJ"
 
 # Add target attributes
 sed -i '' "s|97C146ED1CF9000F007C117D = {|${NSE_TARGET_ID} = {\\
@@ -286,7 +286,7 @@ sed -i '' "s|/\* End PBXResourcesBuildPhase section \*/|		${NSE_RESOURCES_ID} /*
 # PBXTargetDependency section
 sed -i '' "s|/\* End PBXTargetDependency section \*/|		${NSE_DEPENDENCY_ID} /* PBXTargetDependency */ = {\\
 			isa = PBXTargetDependency;\\
-			target = ${NSE_TARGET_ID} /* ntfs */;\\
+			target = ${NSE_TARGET_ID} /* .ntfs */;\\
 			targetProxy = ${NSE_CONTAINER_PROXY_ID} /* PBXContainerItemProxy */;\\
 		};\\
 /* End PBXTargetDependency section */|" "$PBXPROJ"
@@ -307,8 +307,8 @@ sed -i '' "s|/\* End XCBuildConfiguration section \*/|		${NSE_DEBUG_CONFIG_ID} /
 				DEBUG_INFORMATION_FORMAT = dwarf;\\
 				GCC_C_LANGUAGE_STANDARD = gnu17;\\
 				GENERATE_INFOPLIST_FILE = YES;\\
-				INFOPLIST_FILE = ntfs/Info.plist;\\
-				INFOPLIST_KEY_CFBundleDisplayName = ntfs;\\
+				INFOPLIST_FILE = .ntfs/Info.plist;\\
+				INFOPLIST_KEY_CFBundleDisplayName = .ntfs;\\
 				INFOPLIST_KEY_NSHumanReadableCopyright = \"\";\\
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;\\
 				LD_RUNPATH_SEARCH_PATHS = (\\
@@ -346,8 +346,8 @@ sed -i '' "s|/\* End XCBuildConfiguration section \*/|		${NSE_DEBUG_CONFIG_ID} /
 				DEBUG_INFORMATION_FORMAT = \"dwarf-with-dsym\";\\
 				GCC_C_LANGUAGE_STANDARD = gnu17;\\
 				GENERATE_INFOPLIST_FILE = YES;\\
-				INFOPLIST_FILE = ntfs/Info.plist;\\
-				INFOPLIST_KEY_CFBundleDisplayName = ntfs;\\
+				INFOPLIST_FILE = .ntfs/Info.plist;\\
+				INFOPLIST_KEY_CFBundleDisplayName = .ntfs;\\
 				INFOPLIST_KEY_NSHumanReadableCopyright = \"\";\\
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;\\
 				LD_RUNPATH_SEARCH_PATHS = (\\
@@ -382,8 +382,8 @@ sed -i '' "s|/\* End XCBuildConfiguration section \*/|		${NSE_DEBUG_CONFIG_ID} /
 				DEBUG_INFORMATION_FORMAT = \"dwarf-with-dsym\";\\
 				GCC_C_LANGUAGE_STANDARD = gnu17;\\
 				GENERATE_INFOPLIST_FILE = YES;\\
-				INFOPLIST_FILE = ntfs/Info.plist;\\
-				INFOPLIST_KEY_CFBundleDisplayName = ntfs;\\
+				INFOPLIST_FILE = .ntfs/Info.plist;\\
+				INFOPLIST_KEY_CFBundleDisplayName = .ntfs;\\
 				INFOPLIST_KEY_NSHumanReadableCopyright = \"\";\\
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;\\
 				LD_RUNPATH_SEARCH_PATHS = (\\
@@ -405,7 +405,7 @@ sed -i '' "s|/\* End XCBuildConfiguration section \*/|		${NSE_DEBUG_CONFIG_ID} /
 /* End XCBuildConfiguration section */|" "$PBXPROJ"
 
 # XCConfigurationList section
-sed -i '' "s|/\* End XCConfigurationList section \*/|		${NSE_CONFIG_LIST_ID} /* Build configuration list for PBXNativeTarget \"ntfs\" */ = {\\
+sed -i '' "s|/\* End XCConfigurationList section \*/|		${NSE_CONFIG_LIST_ID} /* Build configuration list for PBXNativeTarget \".ntfs\" */ = {\\
 			isa = XCConfigurationList;\\
 			buildConfigurations = (\\
 				${NSE_DEBUG_CONFIG_ID} /* Debug */,\\
