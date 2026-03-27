@@ -185,7 +185,7 @@ setup-podfile:
 	echo "$(GREEN)✅ Настройка Podfile завершена!$(NC)"
 
 # Notification Service Extension
-NOTIFICATIONS_DIR := $(IOS_DIR)/.ntfs
+NOTIFICATIONS_DIR := $(IOS_DIR)/ntfs
 NOTIFICATIONS_PLIST := $(NOTIFICATIONS_DIR)/Info.plist
 
 .PHONY: setup-notifications
@@ -257,9 +257,9 @@ set-aps-development:
 	else \
 		echo "$(RED)   ❌ Runner.entitlements не найден$(NC)"; \
 	fi
-	@if [ -f "$(IOS_DIR)/.ntfs/.ntfs.entitlements" ]; then \
-		plutil -replace aps-environment -string "development" $(IOS_DIR)/.ntfs/.ntfs.entitlements; \
-		echo "$(GREEN)   ✓ .ntfs.entitlements обновлен$(NC)"; \
+	@if [ -f "$(IOS_DIR)/ntfs/ntfs.entitlements" ]; then \
+		plutil -replace aps-environment -string "development" $(IOS_DIR)/ntfs/ntfs.entitlements; \
+		echo "$(GREEN)   ✓ ntfs.entitlements обновлен$(NC)"; \
 	fi
 	@echo "$(GREEN)✅ aps-environment установлен в development$(NC)"
 
@@ -272,9 +272,9 @@ set-aps-production:
 	else \
 		echo "$(RED)   ❌ Runner.entitlements не найден$(NC)"; \
 	fi
-	@if [ -f "$(IOS_DIR)/.ntfs/.ntfs.entitlements" ]; then \
-		plutil -replace aps-environment -string "production" $(IOS_DIR)/.ntfs/.ntfs.entitlements; \
-		echo "$(GREEN)   ✓ .ntfs.entitlements обновлен$(NC)"; \
+	@if [ -f "$(IOS_DIR)/ntfs/ntfs.entitlements" ]; then \
+		plutil -replace aps-environment -string "production" $(IOS_DIR)/ntfs/ntfs.entitlements; \
+		echo "$(GREEN)   ✓ ntfs.entitlements обновлен$(NC)"; \
 	fi
 	@echo "$(GREEN)✅ aps-environment установлен в production$(NC)"
 
@@ -319,7 +319,7 @@ help:
 	@echo "  $(YELLOW)make setup-podfile$(NC)  - Заменить Podfile из шаблона"
 	@echo ""
 	@echo "  $(YELLOW)make setup-notifications$(NC)  - Добавить Notification Service Extension"
-	@echo "  $(YELLOW)make setup-notifications-frameworks$(NC) - Добавить фреймворки в .ntfs target"
+	@echo "  $(YELLOW)make setup-notifications-frameworks$(NC) - Добавить фреймворки в ntfs target"
 	@echo "  $(YELLOW)make update-notifications$(NC) - Обновить файлы NSE из путей в конфиге"
 	@echo "  $(YELLOW)make remove-notifications$(NC) - Удалить Notification Service Extension"
 	@echo ""
