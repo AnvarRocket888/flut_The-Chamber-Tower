@@ -20,11 +20,11 @@
     <key>provisioningProfiles</key>
     <dict>
         <!-- Bundle ID основного приложения -->
-        <key>com.thecham.bertower</key>
+        <key>com.mariageorgiou.thechambertower</key>
         <string>The Chamber Tower</string>
         
         <!-- Bundle ID notification extension -->
-        <key>com.thecham.bertower.ntfs</key>
+        <key>com.mariageorgiou.thechambertower.ntfs</key>
         <string>The Chamber Tower ntfs</string>
     </dict>
 </dict>
